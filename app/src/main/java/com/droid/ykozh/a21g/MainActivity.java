@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         MainMenu mMainMenu = new MainMenu(this,size.x,size.y); // создаём mMainMenu
 
-        LinearLayout gameLayout = (LinearLayout) findViewById(R.id.gameLayout); // находим gameLayout
+        LinearLayout gameLayout = (LinearLayout) findViewById(R.id.mainMenuAnimLayout); // находим gameLayout
         gameLayout.addView(mMainMenu);
 
     }
