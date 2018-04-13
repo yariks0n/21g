@@ -21,13 +21,10 @@ public class MainActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
 
-        Log.i("MainActivity","x "+size.x);
-        Log.i("MainActivity","y "+size.y);
-
         MainMenu mMainMenu = new MainMenu(this,size.x,size.y); // создаём mMainMenu
 
-        LinearLayout gameLayout = (LinearLayout) findViewById(R.id.mainMenuAnimLayout); // находим gameLayout
-        gameLayout.addView(mMainMenu);
+        LinearLayout mainMenuAnimLayout = (LinearLayout) findViewById(R.id.mainMenuAnimLayout); // находим gameLayout
+        mainMenuAnimLayout.addView(mMainMenu);
 
     }
 

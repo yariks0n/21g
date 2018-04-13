@@ -75,9 +75,7 @@ public class MainMenu extends SurfaceView implements Runnable{
 
         try {
             cardNames = assetManager.list(CARDS_FOLDER);
-            Log.i(TAG, "Found " + cardNames.length + " cards");
         } catch (IOException ioe) {
-            Log.e(TAG, "Could not list assets", ioe);
             return;
         }
 
