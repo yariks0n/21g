@@ -1,18 +1,13 @@
 package com.droid.ykozh.a21g;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,7 +27,6 @@ public class MainMenu extends SurfaceView implements Runnable{
     private int cardHeight;
 
     // Game objects
-    private String[] cardNames;
     private ArrayList<Card> mCards = new ArrayList<>();
     private ArrayList<Card> mCardsDraw1 = new ArrayList<>();
     private ArrayList<Card> mCardsDraw2 = new ArrayList<>();
@@ -40,8 +34,6 @@ public class MainMenu extends SurfaceView implements Runnable{
     private ArrayList<Card> mCardsDraw4 = new ArrayList<>();
     private ArrayList<Card> mCardsDraw5 = new ArrayList<>();
     private ArrayList<Card> mCardsDraw6 = new ArrayList<>();
-
-    private InputStream inputStream;
 
     // For drawing
     private Paint paint;
@@ -68,27 +60,7 @@ public class MainMenu extends SurfaceView implements Runnable{
         ourHolder = getHolder();
         paint = new Paint();
 
-        AssetManager assetManager = context.getAssets();
-        AssetFileDescriptor descriptor;
-
-        try {
-            cardNames = assetManager.list(Settings.CARDS_FOLDER);
-        } catch (IOException ioe) {
-            return;
-        }
-
-        for (String filename : cardNames) {
-            String assetPath = Settings.CARDS_FOLDER + "/" + filename;
-
-            try {
-                Card card = new Card(context,assetPath);
-                mCards.add(card);
-                inputStream = context.getAssets().open(assetPath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
+        mCards = Cards.getCards();
 
         screenX = x;
         screenY = y;
@@ -117,7 +89,7 @@ public class MainMenu extends SurfaceView implements Runnable{
     public void run() {
         while (playing) {
 
-            Log.i(TAG,""+yGroup1);
+            //Log.i(TAG,""+yGroup1);
 
             update();
             draw();

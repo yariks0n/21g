@@ -9,17 +9,10 @@ import java.io.InputStream;
 
 public class Card {
     private Bitmap bitmap;
-    private String mAssetPath;
     private String mName;
     private int mScore;
 
-    private int x;
-    private int y;
-    private int maxY;
-    private int minY;
-
     public Card(Context context,String assetPath) {
-        mAssetPath = assetPath;
         String[] components = assetPath.split("/");
         String filename = components[components.length - 1];
         mName = filename.replace(".gif", "");
@@ -41,20 +34,8 @@ public class Card {
         return mName;
     }
 
-    public String getAssetPath() {
-        return mAssetPath;
-    }
-
     public int getScore() {
         return mScore;
-    }
-
-    public void update() {
-        y += 1;
-    }
-
-    public int getY(){
-        return y;
     }
 
     public Bitmap getBitmap() {

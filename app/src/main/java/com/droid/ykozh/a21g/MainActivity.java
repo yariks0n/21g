@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Cards.setCards(this);
+
         Display display = getWindowManager().getDefaultDisplay();
         // Load the resolution into a Point object
         Point size = new Point();

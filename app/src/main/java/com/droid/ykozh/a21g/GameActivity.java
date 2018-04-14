@@ -4,6 +4,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
+import android.widget.LinearLayout;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -18,8 +19,8 @@ public class GameActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
 
-        /*mGame = new Game(this,size.x,size.y);
+        mGame = new Game(this,size.x,size.y);
         LinearLayout gameLayout = (LinearLayout)findViewById(R.id.gameLayout);
-        gameLayout.addView(mGame);*/
+        gameLayout.addView(mGame);
     }
 }
