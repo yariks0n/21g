@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.util.Log;
-import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -22,11 +19,12 @@ import java.util.Random;
 public class MainMenu extends SurfaceView implements Runnable{
 
     private static final String TAG = "MainMenu";
-    private static final String CARDS_FOLDER = "cards";
-    volatile boolean playing = true;
-    Thread gameThread = null;
+    private boolean playing = true;
+    public Thread gameThread = null;
     final Random random = new Random();
     private int anim_speed = 3;
+
+    public String testString = "test";
 
     private int screenX;
     private int screenY;
@@ -74,13 +72,13 @@ public class MainMenu extends SurfaceView implements Runnable{
         AssetFileDescriptor descriptor;
 
         try {
-            cardNames = assetManager.list(CARDS_FOLDER);
+            cardNames = assetManager.list(Settings.CARDS_FOLDER);
         } catch (IOException ioe) {
             return;
         }
 
         for (String filename : cardNames) {
-            String assetPath = CARDS_FOLDER + "/" + filename;
+            String assetPath = Settings.CARDS_FOLDER + "/" + filename;
 
             try {
                 Card card = new Card(context,assetPath);
@@ -118,6 +116,9 @@ public class MainMenu extends SurfaceView implements Runnable{
     @Override
     public void run() {
         while (playing) {
+
+            Log.i(TAG,""+yGroup1);
+
             update();
             draw();
             control();
@@ -219,7 +220,7 @@ public class MainMenu extends SurfaceView implements Runnable{
 
     private void control(){
         try {
-            gameThread.sleep(1);
+            gameThread.sleep(17);
         } catch (InterruptedException e) {
 
         }
