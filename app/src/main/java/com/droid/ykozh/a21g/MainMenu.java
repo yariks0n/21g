@@ -88,9 +88,6 @@ public class MainMenu extends SurfaceView implements Runnable{
     @Override
     public void run() {
         while (playing) {
-
-            //Log.i(TAG,""+yGroup1);
-
             update();
             draw();
             control();
@@ -107,13 +104,13 @@ public class MainMenu extends SurfaceView implements Runnable{
             //yGroup5+=anim_speed;
             yGroup6+=anim_speed;
 
-            if (yGroup1 > screenY) {
+            /*if (yGroup1 > screenY) {
                 yGroup1 = -cardHeight;
                 mCardsDraw1.clear();
                 for (int i = 0; i <= 14; i++) {
                     mCardsDraw1.add(mCards.get(random.nextInt(mCards.size() - 1)));
                 }
-            }
+            }*/
 
             if (yGroup2 > screenY) {
                 yGroup2 = -cardHeight;
@@ -123,13 +120,13 @@ public class MainMenu extends SurfaceView implements Runnable{
                 }
             }
 
-            if (yGroup3 > screenY) {
+            /*if (yGroup3 > screenY) {
                 yGroup3 = -cardHeight;
                 mCardsDraw3.clear();
                 for (int i = 0; i <= 14; i++) {
                     mCardsDraw3.add(mCards.get(random.nextInt(mCards.size() - 1)));
                 }
-            }
+            }*/
 
             if (yGroup4 > screenY) {
                 yGroup4 = -cardHeight;
@@ -139,13 +136,13 @@ public class MainMenu extends SurfaceView implements Runnable{
                 }
             }
 
-            if (yGroup5 > screenY) {
+            /*if (yGroup5 > screenY) {
                 yGroup5 = -cardHeight;
                 mCardsDraw5.clear();
                 for (int i = 0; i <= 14; i++) {
                     mCardsDraw5.add(mCards.get(random.nextInt(mCards.size() - 1)));
                 }
-            }
+            }*/
             if (yGroup6 > screenY) {
                 yGroup6 = -cardHeight;
                 mCardsDraw6.clear();
@@ -181,11 +178,14 @@ public class MainMenu extends SurfaceView implements Runnable{
     private void drawLine(Canvas canvas,Paint paint, ArrayList<Card> cards, int y){
         int countGroup = 0;
         int posXGroup = 0;
-        for (Card card : cards) {
-            Bitmap newBitmap = Bitmap.createScaledBitmap(card.getBitmap(), cardWidth, cardHeight, false);
-            canvas.drawBitmap(newBitmap, posXGroup, y, paint);
-            posXGroup = cardWidth*countGroup;
-            countGroup++;
+
+        if(cards.size() > 0){
+            for (Card card : cards) {
+                Bitmap newBitmap = Bitmap.createScaledBitmap(card.getBitmap(), cardWidth, cardHeight, false);
+                canvas.drawBitmap(newBitmap, posXGroup, y, paint);
+                posXGroup = cardWidth*countGroup;
+                countGroup++;
+            }
         }
     }
 

@@ -73,14 +73,15 @@ public class GameActivity extends AppCompatActivity {
                     if (mGame.player1Game) {
                         mGame.player1Game = false;
                         mGame.player2Game = true;
+                        mGame.drawCards.clear();
                     }else if (mGame.player2Game) {
                         mGame.player1Game = false;
                         mGame.player2Game = false;
+                        mGame.gameEnd = true;
                         playerControl.setVisibility(View.INVISIBLE);
                         gameControl.setVisibility(View.VISIBLE);
                     }
                 }
-                mGame.drawCards.clear();
                 mGame.updateView();
                 mGame.checkGameState();
             }
@@ -110,5 +111,9 @@ public class GameActivity extends AppCompatActivity {
         mGame.init();
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mGame.release();
+    }
 }

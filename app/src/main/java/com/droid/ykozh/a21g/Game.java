@@ -1,14 +1,21 @@
 package com.droid.ykozh.a21g;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.Collections.shuffle;
 
@@ -30,6 +37,10 @@ public class Game extends View {
     public boolean player1Win = false;
     public boolean player2Win = false;
 
+    private AssetManager mAssets;
+    private List<Sound> mSounds = new ArrayList<>();
+    private SoundPool mSoundPool;
+
     public Game(Context context, int x, int y) {
         super(context);
         screenX = x;
@@ -43,6 +54,38 @@ public class Game extends View {
         textPaint.setColor(Color.BLACK);
         textPaint.setTextAlign(Paint.Align.LEFT);
         textPaint.setTextSize(55);
+
+        mAssets = context.getAssets();
+        mSoundPool = new SoundPool(Settings.MAX_SOUNDS, AudioManager.STREAM_MUSIC, 0);
+        loadSounds();
+
+    }
+
+    private void loadSounds() {
+        String[] soundNames;
+        try {
+            soundNames = mAssets.list(Settings.SOUNDS_FOLDER);
+        } catch (IOException ioe) {
+            return;
+        }
+
+        for (String filename : soundNames) {
+            try {
+                String assetPath = Settings.SOUNDS_FOLDER + "/" + filename;
+                Sound sound = new Sound(assetPath);
+                Log.i(TAG, "File sound: " + filename);
+                load(sound);
+                mSounds.add(sound);
+            } catch (IOException ioe) {
+                Log.e(TAG, "Could not load sound " + filename, ioe);
+            }
+        }
+    }
+
+    private void load(Sound sound) throws IOException {
+        AssetFileDescriptor afd = mAssets.openFd(sound.getAssetPath());
+        int soundId = mSoundPool.load(afd, 1);
+        sound.setSoundId(soundId);
     }
 
     public void init(){
@@ -56,6 +99,22 @@ public class Game extends View {
         player2Win = false;
         player1Score = 0;
         player2Score = 0;
+    }
+
+    public void playSound(String soundName) {
+        for(Sound sound: mSounds) {
+            if (soundName.equals(sound.getName())){
+                Integer soundId = sound.getSoundId();
+                if (soundId == null) {
+                    return;
+                }
+                mSoundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f);
+            }
+        }
+    }
+
+    public void release() {
+        mSoundPool.release();
     }
 
     public void updateView() {
@@ -97,6 +156,10 @@ public class Game extends View {
             }else{
                 player2Win = true;
             }
+        }
+
+        if(gameEnd){
+            playSound("applause");
         }
     }
 
