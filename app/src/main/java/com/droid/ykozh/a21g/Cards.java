@@ -18,17 +18,18 @@ public class Cards {
         } catch (IOException ioe) {
             return;
         }
-
         for (String filename : cardNames) {
             String assetPath = Settings.CARDS_FOLDER + "/" + filename;
-
             Card card = new Card(context, assetPath);
             mCards.add(card);
         }
     }
 
     public static ArrayList<Card> getCards() {
-        return mCards;
+        ArrayList<Card> newCards = new ArrayList<>();
+        for (Card card : mCards) {
+            newCards.add(card);
+        }
+        return newCards;
     }
-
 }

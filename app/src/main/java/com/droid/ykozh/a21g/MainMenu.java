@@ -17,7 +17,7 @@ public class MainMenu extends SurfaceView implements Runnable{
     private boolean playing = true;
     public Thread gameThread = null;
     final Random random = new Random();
-    private int anim_speed = 3;
+    private int anim_speed = 1;
 
     public String testString = "test";
 
@@ -69,11 +69,11 @@ public class MainMenu extends SurfaceView implements Runnable{
         cardHeight = screenY / 5;
 
         for(int i = 0; i <= 14; i++){
-            mCardsDraw1.add(mCards.get(random.nextInt(mCards.size())));
+            //mCardsDraw1.add(mCards.get(random.nextInt(mCards.size())));
             mCardsDraw2.add(mCards.get(random.nextInt(mCards.size())));
-            mCardsDraw3.add(mCards.get(random.nextInt(mCards.size())));
+           // mCardsDraw3.add(mCards.get(random.nextInt(mCards.size())));
             mCardsDraw4.add(mCards.get(random.nextInt(mCards.size())));
-            mCardsDraw5.add(mCards.get(random.nextInt(mCards.size())));
+            //mCardsDraw5.add(mCards.get(random.nextInt(mCards.size())));
             mCardsDraw6.add(mCards.get(random.nextInt(mCards.size())));
         }
 
@@ -100,13 +100,12 @@ public class MainMenu extends SurfaceView implements Runnable{
     private void update(){
 
         if(mCards.size() > 20) {
-            yGroup1+=anim_speed;
+            //yGroup1+=anim_speed;
             yGroup2+=anim_speed;
-            yGroup3+=anim_speed;
+            //yGroup3+=anim_speed;
             yGroup4+=anim_speed;
-            yGroup5+=anim_speed;
+            //yGroup5+=anim_speed;
             yGroup6+=anim_speed;
-
 
             if (yGroup1 > screenY) {
                 yGroup1 = -cardHeight;
@@ -165,13 +164,13 @@ public class MainMenu extends SurfaceView implements Runnable{
             canvas = ourHolder.lockCanvas();
 
             // Rub out the last frame
-            canvas.drawColor(Color.argb(255, 0, 0, 0));
+            canvas.drawColor(Color.argb(255, 255, 255, 255));
 
-            drawLine(canvas,paint,mCardsDraw1,yGroup1);
+            //drawLine(canvas,paint,mCardsDraw1,yGroup1);
             drawLine(canvas,paint,mCardsDraw2,yGroup2);
-            drawLine(canvas,paint,mCardsDraw3,yGroup3);
+            //drawLine(canvas,paint,mCardsDraw3,yGroup3);
             drawLine(canvas,paint,mCardsDraw4,yGroup4);
-            drawLine(canvas,paint,mCardsDraw5,yGroup5);
+            //drawLine(canvas,paint,mCardsDraw5,yGroup5);
             drawLine(canvas,paint,mCardsDraw6,yGroup6);
 
             // Unlock and draw the scene

@@ -67,4 +67,11 @@ public class MainActivity extends AppCompatActivity {
         mMainMenu.resume();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(TAG, "start");
+        mMainMenu.resume();
+    }
+
 }
