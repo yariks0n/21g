@@ -53,19 +53,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         startAnimation();
-
     }
 
     private void startAnimation() {
         animAcepted = true;
         scaleXAnimator = ObjectAnimator
-                .ofFloat(cardView, "scaleX", 7)
+                .ofFloat(cardView, "scaleX", 2)
                 .setDuration(3000);
 
         scaleYAnimator = ObjectAnimator
-                .ofFloat(cardView, "scaleY", 7)
+                .ofFloat(cardView, "scaleY", 2)
                 .setDuration(3000);
 
 

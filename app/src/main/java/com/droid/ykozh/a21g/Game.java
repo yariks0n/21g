@@ -25,7 +25,10 @@ public class Game extends View {
     public ArrayList<Card> mCards = new ArrayList<>();
     public ArrayList<Card> drawCards = new ArrayList<>();
 
-    private Paint paint, mBackgroundPaint,textPaint;
+    private Paint paint, mBackgroundPaint;
+    private Paint textPaintPlayer1;
+    private Paint textPaintPlayer2;
+    private Paint textWin;
 
     private int screenX, screenY, cardWidth, cardHeight;
     private int player1Score = 0;
@@ -45,15 +48,23 @@ public class Game extends View {
         super(context);
         screenX = x;
         screenY = y;
-        cardWidth = screenX / 10;
-        cardHeight = screenY / 4;
+        cardWidth = (int)screenX / 5;
+        cardHeight = (int)(screenY / 2.2);
         paint = new Paint();
         mBackgroundPaint = new Paint();
-        mBackgroundPaint.setColor(0xfff8efe0);
-        textPaint = new Paint();
-        textPaint.setColor(Color.BLACK);
-        textPaint.setTextAlign(Paint.Align.LEFT);
-        textPaint.setTextSize(55);
+        mBackgroundPaint.setColor(Color.WHITE);
+        textPaintPlayer1 = new Paint();
+        textPaintPlayer1.setColor(Color.BLACK);
+        textPaintPlayer1.setTextAlign(Paint.Align.LEFT);
+        textPaintPlayer1.setTextSize(35);
+        textPaintPlayer2 = new Paint();
+        textPaintPlayer2.setColor(Color.BLACK);
+        textPaintPlayer2.setTextAlign(Paint.Align.RIGHT);
+        textPaintPlayer2.setTextSize(35);
+        textWin = new Paint();
+        textWin.setColor(Color.BLACK);
+        textWin.setTextAlign(Paint.Align.CENTER);
+        textWin.setTextSize(65);
 
         mAssets = context.getAssets();
         mSoundPool = new SoundPool(Settings.MAX_SOUNDS, AudioManager.STREAM_MUSIC, 0);
@@ -167,10 +178,15 @@ public class Game extends View {
     protected void onDraw(Canvas canvas) {
         canvas.drawPaint(mBackgroundPaint);
 
-        int step = 50;
+        int step = cardWidth/3;
         int countDrawCards = drawCards.size();
-        int left = screenX/2 - cardWidth - step/4*(countDrawCards-1);
-        int top = screenY/3;
+         /*Log.i(TAG,"screenX: "+screenX);
+        Log.i(TAG,"countDrawCards: "+countDrawCards);
+        Log.i(TAG,"countDrawCards: "+(cardWidth + step*countDrawCards-1));
+
+        Log.i(TAG,"countDrawCards: "+(screenX-(cardWidth + step*countDrawCards-1)));*/
+        int left = (screenX-(cardWidth + step*countDrawCards-1))/2 - step/2;
+        int top = (int)(screenY/4.7);
 
         for (Card card : drawCards){
             left+=step;
@@ -179,15 +195,15 @@ public class Game extends View {
         }
 
         if(player1Game || gameEnd)
-            canvas.drawText("Player 1: "+getPlayer1Score(),30,60,textPaint);
+            canvas.drawText("Player 1: "+getPlayer1Score(),30,60,textPaintPlayer1);
 
         if(player2Game || gameEnd)
-            canvas.drawText("Player 2: "+getPlayer2Score(),30,170,textPaint);
+            canvas.drawText("Player 2: "+getPlayer2Score(),screenX-30,60,textPaintPlayer2);
 
         if(player1Win){
-            canvas.drawText("Player1 WIN !",screenX/2-170,200,textPaint);
+            canvas.drawText("Player1 WIN !",screenX/2,80,textWin);
         }else if(player2Win){
-            canvas.drawText("Player2 WIN !",screenX/2-170,200,textPaint);
+            canvas.drawText("Player2 WIN !",screenX/2,80,textWin);
         }
 
     }
