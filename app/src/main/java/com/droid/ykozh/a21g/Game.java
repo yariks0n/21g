@@ -186,7 +186,7 @@ public class Game extends View {
 
         Log.i(TAG,"countDrawCards: "+(screenX-(cardWidth + step*countDrawCards-1)));*/
         int left = (screenX-(cardWidth + step*countDrawCards-1))/2 - step/2;
-        int top = (int)(screenY/4.7);
+        int top = screenY/2 - (int)(cardHeight/1.5);
 
         for (Card card : drawCards){
             left+=step;
