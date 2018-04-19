@@ -23,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_game);
 
         Display display = getWindowManager().getDefaultDisplay();
@@ -97,6 +98,12 @@ public class GameActivity extends AppCompatActivity {
                 mGame.updateView();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        finish();
+        overridePendingTransition(R.anim.top_in,R.anim.bottom_out);
     }
 
     @Override

@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         Cards.setCards(this);
         cardView = (ImageView) findViewById(R.id.card_img);
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), GameActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.bottom_in,R.anim.top_out);
             }
         });
         startAnimation();
@@ -91,17 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-
-                if (animAcepted){
-                    cardView.setImageBitmap(Cards.getRandomCard().getBitmap());
-                    animatorSet = new AnimatorSet();
-                    animatorSet
-                            .play(scaleXAnimator)
-                            .with(scaleYAnimator)
-                            .before(scalelXAnimator)
-                            .before(scalelYAnimator);
-                    animatorSet.start();
-                }
+                startAnimSet();
             }
 
             @Override
@@ -114,6 +108,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void startAnimSet(){
+        animatorSet.cancel();
+        if (animAcepted){
+            cardView.setImageBitmap(Cards.getRandomCard().getBitmap());
+            animatorSet = new AnimatorSet();
+            animatorSet
+                    .play(scaleXAnimator)
+                    .with(scaleYAnimator)
+                    .before(scalelXAnimator)
+                    .before(scalelYAnimator);
+            animatorSet.start();
+        }
     }
 
     @Override
@@ -130,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onResume() {
         super.onResume();
-        startAnimation();
+        animAcepted = true;
+        startAnimSet();
     }
 
 

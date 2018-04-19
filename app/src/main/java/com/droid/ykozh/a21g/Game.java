@@ -195,10 +195,10 @@ public class Game extends View {
         }
 
         if(player1Game || gameEnd)
-            canvas.drawText("Player 1: "+getPlayer1Score(),30,60,textPaintPlayer1);
+            canvas.drawText("Player1: "+getPlayer1Score(),30,60,textPaintPlayer1);
 
         if(player2Game || gameEnd)
-            canvas.drawText("Player 2: "+getPlayer2Score(),screenX-30,60,textPaintPlayer2);
+            canvas.drawText("Player2: "+getPlayer2Score(),screenX-30,60,textPaintPlayer2);
 
         if(player1Win){
             canvas.drawText("Player1 WIN !",screenX/2,80,textWin);
