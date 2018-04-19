@@ -50,19 +50,19 @@ public class Game extends View {
         screenX = x;
         screenY = y;
         cardWidth = (int)screenX / 5;
-        cardHeight = (int)(screenY / 2.2);
+        cardHeight = (int)(screenY / 2.1);
         paint = new Paint();
         mBackgroundPaint = new Paint();
         mBackgroundPaint.setColor(Color.WHITE);
         textPaintPlayer1 = new Paint();
         textPaintPlayer1.setColor(Color.BLACK);
         textPaintPlayer1.setTextAlign(Paint.Align.LEFT);
-        textPaintPlayer1.setTextSize(45);
+        textPaintPlayer1.setTextSize(35);
         textPaintPlayer1.setTypeface(Typeface.MONOSPACE);
         textPaintPlayer2 = new Paint();
         textPaintPlayer2.setColor(Color.BLACK);
         textPaintPlayer2.setTextAlign(Paint.Align.RIGHT);
-        textPaintPlayer2.setTextSize(45);
+        textPaintPlayer2.setTextSize(35);
         textPaintPlayer2.setTypeface(Typeface.MONOSPACE);
         textWin = new Paint();
         textWin.setColor(Color.BLACK);
@@ -191,7 +191,7 @@ public class Game extends View {
 
         Log.i(TAG,"countDrawCards: "+(screenX-(cardWidth + step*countDrawCards-1)));*/
         int left = (screenX-(cardWidth + step*countDrawCards-1))/2 - step/2;
-        int top = screenY/2 - (int)(cardHeight/1.5);
+        int top = screenY/2 - (int)(cardHeight/2);
 
         for (Card card : drawCards){
             left+=step;
